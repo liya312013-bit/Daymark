@@ -31,6 +31,8 @@
     const thankYouTitle = document.querySelector("#thank-you-title");
     const homeTitle = document.title;
     let returnFocus;
+    let quoteOpening = false;
+    const fullMotion = window.matchMedia("(prefers-reduced-motion: no-preference)");
 
     function renderPage() {
       const confirmation = history.state?.daymarkQuote;
@@ -71,7 +73,16 @@
     });
 
     document.querySelectorAll("[data-open-quote]").forEach((button) => {
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async () => {
+        if (quote.open || quoteOpening) return;
+        if (fullMotion.matches && button.classList.contains("button--action")) {
+          quoteOpening = true;
+          button.classList.add("is-opening");
+          await new Promise((resolve) => window.setTimeout(resolve, 260));
+          button.classList.remove("is-opening");
+          quoteOpening = false;
+          if (landing.hidden) return;
+        }
         returnFocus = menu.contains(button) ? menuToggle : button;
         setMenu(false);
         const consultationSystem = button.dataset.consultationSystem;
@@ -139,48 +150,6 @@
     });
     window.addEventListener("hashchange", renderPage);
     renderPage();
-
-    const fullMotion = window.matchMedia("(prefers-reduced-motion: no-preference)");
-
-    if (fullMotion.matches && "IntersectionObserver" in window && Element.prototype.animate) {
-      const stepsInView = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.intersectionRatio < .5) continue;
-          const number = entry.target;
-          stepsInView.unobserve(number);
-          if (!fullMotion.matches) continue;
-
-          const digits = [...number.textContent.trim()];
-          const reel = document.createElement("span");
-          reel.className = "backup__reel";
-          const columns = digits.map((digit) => {
-            const column = document.createElement("span");
-            column.className = "backup__digit";
-            const lastRow = 10 + Number(digit);
-            for (let row = 0; row <= lastRow; row++) {
-              const item = document.createElement("span");
-              item.textContent = row % 10;
-              column.append(item);
-            }
-            reel.append(column);
-            return { column, lastRow };
-          });
-
-          number.append(reel);
-          number.classList.add("is-rolling");
-          const animations = columns.map(({ column, lastRow }, index) => column.animate(
-            [{ transform: "translateY(0)" }, { transform: `translateY(-${lastRow * 100}%)` }],
-            { duration: 700 + index * 150, easing: "cubic-bezier(.2,.65,.2,1)", fill: "forwards" },
-          ));
-          Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
-            reel.remove();
-            number.classList.remove("is-rolling");
-          });
-        }
-      }, { threshold: .5 });
-
-      document.querySelectorAll(".backup__number").forEach((number) => stepsInView.observe(number));
-    }
 
     const gallery = document.querySelector(".gallery");
     const galleryButtons = [...document.querySelectorAll(".examples__open")];

@@ -544,15 +544,26 @@ SOFTWARE.
       text-align: center;
     }
     .button:hover { background-color: #ffd16e; }
-    .button--action { display: inline-grid; }
-    .button--action > * { grid-area: 1 / 1; place-self: center; }
-    .button--action > svg { opacity: 0; }
-    .button--action:active:not(:disabled) {
+    .button--action { position: relative; display: inline-grid; }
+    .button--action::before {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
       background: var(--ink);
-      color: var(--white);
+      opacity: 0;
+      pointer-events: none;
+      content: "";
     }
-    .button--action:active:not(:disabled) > span { opacity: 0; }
-    .button--action:active:not(:disabled) > svg { opacity: 1; }
+    .button--action > * { position: relative; grid-area: 1 / 1; place-self: center; }
+    .button--action > svg { color: var(--white); opacity: 0; }
+    .button--action:is(:active, .is-opening):not(:disabled)::before { opacity: 1; }
+    .button--action:is(:active, .is-opening):not(:disabled) > span { opacity: 0; }
+    .button--action:is(:active, .is-opening):not(:disabled) > svg { opacity: 1; }
+    @media (prefers-reduced-motion: no-preference) {
+      .button--action::before, .button--action > span, .button--action > svg {
+        transition: opacity .26s ease;
+      }
+    }
     .hero__action .button { font-size: clamp(16px, 1.88vw, 32px); }
     .features { display: grid; justify-self: end; gap: .85vw; padding: 0; list-style: none; }
     .features li { display: flex; align-items: center; gap: .85vw; }
@@ -571,6 +582,17 @@ SOFTWARE.
       color-scheme: light;
     }
     .quote::backdrop { background: rgb(0 15 31 / 72%); }
+    @media (prefers-reduced-motion: no-preference) {
+      .quote[open] { animation: quote-enter .52s cubic-bezier(.2, .7, .2, 1); }
+      .quote[open]::backdrop { animation: quote-backdrop-enter .46s ease-out; }
+    }
+    @keyframes quote-enter {
+      from { opacity: 0; transform: translateY(14px) scale(.98); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes quote-backdrop-enter {
+      from { background-color: transparent; }
+    }
     body:has(.quote[open]) { overflow: hidden; }
     .quote__close { position: absolute; top: 12px; right: 14px; z-index: 2; }
     .quote h2 {
@@ -694,24 +716,7 @@ SOFTWARE.
     }
     .backup h2 { font-size: clamp(31px, 4.1vw, 70px); }
     .backup h3 { font-size: clamp(20px, 2vw, 34px); }
-    .backup__number {
-      position: relative;
-      font-size: clamp(40px, 4.1vw, 70px);
-      font-variant-numeric: tabular-nums;
-    }
-    .backup__reel { display: none; }
-    @media (prefers-reduced-motion: no-preference) {
-      .backup__number.is-rolling { color: transparent; }
-      .backup__number.is-rolling .backup__reel {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        overflow: hidden;
-        color: var(--ink);
-      }
-      .backup__digit { flex: 1; text-align: center; }
-      .backup__digit > span { display: block; }
-    }
+    .backup__number { font-size: clamp(40px, 4.1vw, 70px); }
     .backup__step {
       display: flex;
       align-items: center;
