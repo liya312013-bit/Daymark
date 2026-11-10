@@ -544,6 +544,15 @@ SOFTWARE.
       text-align: center;
     }
     .button:hover { background-color: #ffd16e; }
+    .button--action { display: inline-grid; }
+    .button--action > * { grid-area: 1 / 1; place-self: center; }
+    .button--action > svg { opacity: 0; }
+    .button--action:active:not(:disabled) {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .button--action:active:not(:disabled) > span { opacity: 0; }
+    .button--action:active:not(:disabled) > svg { opacity: 1; }
     .hero__action .button { font-size: clamp(16px, 1.88vw, 32px); }
     .features { display: grid; justify-self: end; gap: .85vw; padding: 0; list-style: none; }
     .features li { display: flex; align-items: center; gap: .85vw; }
@@ -685,7 +694,24 @@ SOFTWARE.
     }
     .backup h2 { font-size: clamp(31px, 4.1vw, 70px); }
     .backup h3 { font-size: clamp(20px, 2vw, 34px); }
-    .backup__number { font-size: clamp(40px, 4.1vw, 70px); }
+    .backup__number {
+      position: relative;
+      font-size: clamp(40px, 4.1vw, 70px);
+      font-variant-numeric: tabular-nums;
+    }
+    .backup__reel { display: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .backup__number.is-rolling { color: transparent; }
+      .backup__number.is-rolling .backup__reel {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        overflow: hidden;
+        color: var(--ink);
+      }
+      .backup__digit { flex: 1; text-align: center; }
+      .backup__digit > span { display: block; }
+    }
     .backup__step {
       display: flex;
       align-items: center;
@@ -1312,7 +1338,7 @@ SOFTWARE.
 
           <div class="hero__action">
             <p class="promise"><span aria-hidden="true">[</span> POWER THROUGH OUTAGES <span aria-hidden="true">]</span></p>
-            <button class="button" type="button" data-open-quote>GET A FREE QUOTE <svg aria-hidden="true" focusable="false"
+            <button class="button button--action" type="button" data-open-quote><span>GET A FREE QUOTE</span> <svg aria-hidden="true" focusable="false"
   class="lucide lucide-arrow-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -1407,7 +1433,7 @@ SOFTWARE.
         <div>
           <h3>BATTERY BACKUP<br>FOR ESSENTIALS</h3>
           <p>Keep the essentials running when the grid goes down.</p>
-          <button class="button systems__quote" type="button" data-open-quote data-consultation-system="backup">GET A CONSULTATION <svg aria-hidden="true" focusable="false"
+          <button class="button button--action systems__quote" type="button" data-open-quote data-consultation-system="backup"><span>GET A CONSULTATION</span> <svg aria-hidden="true" focusable="false"
   class="lucide lucide-arrow-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -1433,7 +1459,7 @@ SOFTWARE.
         <div>
           <h3>ROOFTOP SOLAR<br>FOR YOUR HOME</h3>
           <p>Generate your own electricity during the day.</p>
-          <button class="button systems__quote" type="button" data-open-quote data-consultation-system="solar">GET A CONSULTATION <svg aria-hidden="true" focusable="false"
+          <button class="button button--action systems__quote" type="button" data-open-quote data-consultation-system="solar"><span>GET A CONSULTATION</span> <svg aria-hidden="true" focusable="false"
   class="lucide lucide-arrow-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -1459,7 +1485,7 @@ SOFTWARE.
         <div>
           <h3>SOLAR &amp; BATTERY<br>IN ONE SYSTEM</h3>
           <p>Use solar power during the day and store extra energy for later.</p>
-          <button class="button systems__quote" type="button" data-open-quote data-consultation-system="both">GET A CONSULTATION <svg aria-hidden="true" focusable="false"
+          <button class="button button--action systems__quote" type="button" data-open-quote data-consultation-system="both"><span>GET A CONSULTATION</span> <svg aria-hidden="true" focusable="false"
   class="lucide lucide-arrow-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -1584,7 +1610,7 @@ SOFTWARE.
       <h2 id="plan-title">SOLAR, BACKUP <span>OR BOTH?</span></h2>
       <div>
         <p>Choose the setup you’re considering and leave your email to request an estimate for your home.</p>
-        <button class="button" type="button" data-open-quote>GET MY FREE QUOTE
+        <button class="button button--action" type="button" data-open-quote><span>GET MY FREE QUOTE</span>
           <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14m-7-7 7 7-7 7"/>
           </svg>
@@ -1671,7 +1697,7 @@ SOFTWARE.
       </label>
       <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" hidden>
       <p id="quote-status" role="alert" hidden></p>
-      <button class="button" type="submit"><span class="quote__submit-label">REQUEST MY QUOTE</span> <svg aria-hidden="true" focusable="false"
+      <button class="button button--action" type="submit"><span class="quote__submit-label">REQUEST MY QUOTE</span> <svg aria-hidden="true" focusable="false"
   class="lucide lucide-arrow-right"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
