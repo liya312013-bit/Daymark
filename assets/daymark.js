@@ -62,7 +62,20 @@
 
     menuToggle.addEventListener("click", () => setMenu(menu.hidden));
     menu.addEventListener("click", (event) => {
-      if (event.target.closest("a")) setMenu(false);
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const target = document.getElementById(link.hash.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+      setMenu(false);
+      // Native hash navigation fires ScrollTrigger's refresh during the scroll.
+      if (location.hash !== link.hash) history.pushState(null, "", link.hash);
+      if (!target.hasAttribute("tabindex")) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: fullMotion.matches ? "smooth" : "instant" });
     });
 
     document.addEventListener("keydown", (event) => {
