@@ -255,6 +255,11 @@ SOFTWARE.
       --gold: #ffc24d;
       --white: #f7fafc;
       --ice: #edf5f7;
+      --page-surface: #e1eff7;
+      --frame-edge: clamp(6px, .65vw, 10px);
+      --page-guide: 5.28vw;
+      --content-inset: calc(var(--page-guide) - var(--frame-edge));
+      --card-radius: 16px;
       --fold-size: clamp(28px, 3.7vw, 57px);
       --fold-line: clamp(3px, .36vw, 6px);
       --fold-radius: clamp(20px, 2.45vw, 38px);
@@ -263,7 +268,7 @@ SOFTWARE.
       font-family: Inter, system-ui, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; background: var(--navy); color: var(--white); }
+    body { margin: 0; background: var(--page-surface); color: var(--white); }
     button, input, select { font: inherit; }
     button { cursor: pointer; }
     button:focus-visible, a:focus-visible {
@@ -271,18 +276,15 @@ SOFTWARE.
       outline-offset: 4px;
     }
     svg { display: block; flex: none; }
-    .hero-frame {
-      --frame-edge: clamp(6px, .65vw, 10px);
-      padding: var(--frame-edge);
-      background: var(--fold-paper);
-    }
+    .hero-frame, .backup { padding-inline: var(--frame-edge); }
+    .hero-frame { padding-block: var(--frame-edge); }
     .hero {
       position: relative;
       isolation: isolate;
       display: flex;
       flex-direction: column;
       min-height: calc(56.25vw - var(--frame-edge) * 2);
-      padding: 2.35vw calc(5.28vw - var(--frame-edge)) 13vw;
+      padding: 2.35vw var(--content-inset) 13vw;
       border-radius: var(--fold-radius);
       overflow: hidden;
       background: var(--navy);
@@ -304,7 +306,7 @@ SOFTWARE.
       z-index: 1;
       width: var(--fold-size);
       aspect-ratio: 1;
-      border-top-left-radius: calc(var(--fold-size) * .63);
+      border-top-left-radius: var(--fold-tip-radius, calc(var(--fold-size) * .63));
       clip-path: polygon(0 0, 100% 0, 0 100%);
       content: "";
       pointer-events: none;
@@ -475,9 +477,10 @@ SOFTWARE.
     .quote form .button { margin-top: 4px; }
     .quote__status { padding-top: 7px; font-weight: 600; }
     @media (max-width: 759px) {
+      :root { --page-guide: 20px; }
       .hero {
         min-height: max(660px, calc(100svh - var(--frame-edge) * 2));
-        padding: 18px calc(20px - var(--frame-edge)) max(180px, 28vw);
+        padding: 18px var(--content-inset) max(180px, 28vw);
       }
       .topbar { grid-template-columns: 44px minmax(0, 1fr) auto; }
       .brand { justify-self: center; width: min(100%, 154px); }
@@ -499,8 +502,78 @@ SOFTWARE.
       .features svg { width: 22px; }
     }
     @media (max-width: 359px) {
-      .hero { padding-inline: calc(16px - var(--frame-edge)); }
+      :root { --page-guide: 16px; }
       .features { grid-template-columns: 1fr; }
+    }
+
+
+    .backup {
+      padding-block-end: var(--frame-edge);
+      color: var(--ink);
+    }
+    .backup:focus { outline: none; }
+    .backup__grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: var(--frame-edge);
+    }
+    .backup__tile {
+      position: relative;
+      min-width: 0;
+      min-height: 164px;
+      padding: clamp(16px, 2.1vw, 34px);
+      border-radius: var(--card-radius);
+      background: var(--ice);
+    }
+    .backup__intro, .backup__outage { padding-inline-start: var(--content-inset); }
+    .backup__store, .backup__essentials { padding-inline-end: var(--content-inset); }
+    .backup__intro {
+      --fold-tip-radius: var(--card-radius);
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+      color: var(--white);
+    }
+    .backup h2, .backup h3, .backup__number {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      line-height: 1.08;
+    }
+    .backup h2 { font-size: clamp(31px, 4.1vw, 70px); }
+    .backup h3 { font-size: clamp(20px, 2vw, 34px); }
+    .backup__number { font-size: clamp(40px, 4.1vw, 70px); }
+    .backup__step {
+      display: flex;
+      align-items: center;
+      gap: clamp(9px, 1.15vw, 18px);
+      margin-bottom: 12px;
+    }
+    .backup__tile p {
+      margin: 0;
+      max-width: 42ch;
+      font-size: clamp(16px, 1.28vw, 21px);
+      line-height: 1.45;
+    }
+    .backup__outage { background: var(--gold); }
+    .backup__essentials { grid-column: span 2; }
+    .backup__essentials h3 { margin-bottom: 12px; }
+    @media (max-width: 759px) {
+      .backup__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .backup__intro, .backup__outage, .backup__essentials {
+        grid-column: 1 / -1;
+        padding-inline: var(--content-inset);
+      }
+      .backup__day { padding-inline-start: var(--content-inset); }
+      .backup__tile { min-height: 0; }
+      .backup__intro { min-height: 136px; }
+      .backup__intro h2 { font-size: clamp(38px, 10vw, 58px); }
+      .backup__day .backup__step, .backup__store .backup__step {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
     }
   </style>
 </head>
@@ -538,6 +611,7 @@ SOFTWARE.
           <span class="phone" aria-label="Demo phone number">+380 (00) 123 45 67</span>
           <nav class="menu" id="hero-menu" aria-label="Main navigation" hidden>
             <a href="#top">Home</a>
+            <a href="#home-backup">How home backup works</a>
             <button type="button" data-open-quote>Get a free quote</button>
           </nav>
         </header>
@@ -592,6 +666,44 @@ SOFTWARE.
         </div>
       </section>
     </div>
+
+
+    <section class="backup" id="home-backup" aria-labelledby="backup-title" tabindex="-1">
+      <div class="backup__grid">
+        <div class="backup__tile backup__intro with-fold with-fold--right">
+          <h2 id="backup-title">HOW HOME<br>BACKUP WORKS</h2>
+        </div>
+
+        <div class="backup__tile backup__day">
+          <div class="backup__step">
+            <span class="backup__number" aria-hidden="true">01</span>
+            <h3>GENERATE</h3>
+          </div>
+          <p>Rooftop panels generate electricity during the day.</p>
+        </div>
+
+        <div class="backup__tile backup__store">
+          <div class="backup__step">
+            <span class="backup__number" aria-hidden="true">02</span>
+            <h3>STORE</h3>
+          </div>
+          <p>A battery stores extra solar energy for later.</p>
+        </div>
+
+        <div class="backup__tile backup__outage">
+          <div class="backup__step">
+            <span class="backup__number" aria-hidden="true">03</span>
+            <h3>USE IT WHEN IT COUNTS</h3>
+          </div>
+          <p>During an outage, a backup system can keep selected devices running.</p>
+        </div>
+
+        <div class="backup__tile backup__essentials">
+          <h3>WHAT WOULD YOU KEEP ON?</h3>
+          <p>Lights, Wi-Fi, or the fridge? Your setup determines what can stay on and for how long.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <dialog class="quote with-fold with-fold--right" aria-labelledby="quote-title" aria-describedby="quote-intro">
@@ -664,9 +776,8 @@ SOFTWARE.
     }
 
     menuToggle.addEventListener("click", () => setMenu(menu.hidden));
-    menu.querySelector("a").addEventListener("click", () => {
-      setMenu(false);
-      menuToggle.focus();
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setMenu(false);
     });
 
     document.addEventListener("keydown", (event) => {
