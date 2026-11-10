@@ -1231,26 +1231,36 @@ SOFTWARE.
     .site-footer a:hover { text-decoration: underline; }
     .site-footer__meta {
       grid-area: meta;
-      display: grid;
+      display: flex;
       justify-self: end;
-      justify-items: end;
-      width: min(100%, 220px);
+      align-items: center;
       gap: 4px;
       margin-top: clamp(32px, 8.3vw, 164px);
       color: #cac2b7;
       font-size: 16px;
     }
+    .site-footer__caption { display: grid; text-align: end; line-height: 1.35; }
     .site-footer a.site-footer__credit {
-      display: block;
-      width: 100%;
+      display: grid;
+      place-items: center;
+      min-width: 44px;
       min-height: 44px;
     }
-    .site-footer__credit img {
+    .site-footer__monogram {
+      position: relative;
       display: block;
-      width: 100%;
+      width: 36px;
+      height: 40px;
+      overflow: hidden;
+    }
+    .site-footer__monogram img {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 164px;
+      max-width: none;
       height: auto;
     }
-    .site-footer__copyright { margin-inline-end: .55em; }
     @media (max-width: 759px) {
       .cost, .plan { grid-template-columns: 1fr; }
       .cost h2 { font-size: clamp(44px, 10vw, 72px); }
@@ -1631,10 +1641,15 @@ SOFTWARE.
       <img src="./assets/daymark-logo.webp" width="2172" height="724" alt="" decoding="async" loading="lazy">
     </a>
     <div class="site-footer__meta">
-      <a class="site-footer__credit" href="https://www.instagram.com/feliya.design.ua/" target="_blank" rel="noopener noreferrer">
-        <img src="./assets/feliya-editorial-signature.png" width="886" height="247" alt="FeLiya · Web design · Portfolio concept. FeLiya on Instagram" decoding="async" loading="lazy">
+      <div class="site-footer__caption">
+        <span>DAYMARK © 2026</span>
+        <span>Portfolio concept</span>
+      </div>
+      <a class="site-footer__credit" href="https://www.instagram.com/feliya.design.ua/" target="_blank" rel="noopener noreferrer" aria-label="FeLiya on Instagram">
+        <span class="site-footer__monogram" aria-hidden="true">
+          <img src="./assets/feliya-editorial-signature.png" width="886" height="247" alt="" decoding="async" loading="lazy">
+        </span>
       </a>
-      <span class="site-footer__copyright">DAYMARK © 2026</span>
     </div>
   </footer>
 
