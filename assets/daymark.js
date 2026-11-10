@@ -175,7 +175,7 @@
             { opacity: 0 },
           ];
       galleryLightAnimation = galleryLight.animate(frames, {
-        duration: reflection ? 1050 : 1650,
+        duration: reflection ? 1750 : 1650,
         easing: "ease-out",
       });
     }
@@ -288,7 +288,7 @@
           });
           if (overPanels && !overPanelsBefore && !hero.classList.contains("is-charging")) {
             hero.classList.add("is-charging");
-            pulseTimer = window.setTimeout(() => hero.classList.remove("is-charging"), 1250);
+            pulseTimer = window.setTimeout(() => hero.classList.remove("is-charging"), 2000);
           }
           overPanelsBefore = overPanels;
           overControlBefore = overControl;

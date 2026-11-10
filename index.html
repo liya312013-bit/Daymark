@@ -390,13 +390,13 @@ SOFTWARE.
     @media (prefers-reduced-motion: no-preference) {
       .hero.is-charging .hero__solar-trace {
         animation-name: solar-current;
-        animation-duration: .95s;
+        animation-duration: 1.65s;
         animation-timing-function: ease-out;
       }
     }
     @media (hover: none) and (prefers-reduced-motion: no-preference) {
       .hero__solar-trace {
-        animation: solar-current 1.2s .5s ease-out both;
+        animation: solar-current 1.9s .5s ease-out both;
       }
       .hero__solar-trace:nth-child(2) { animation-delay: .6s; }
       .hero__solar-trace:nth-child(3) { animation-delay: .7s; }
@@ -985,12 +985,12 @@ SOFTWARE.
         background-color: #fff1bf;
       }
       [data-light-kind="window"]:focus-visible .project-light { opacity: .72; }
-      [data-light-kind="reflection"]:focus-visible .project-light { animation: panel-reflection .95s ease-out; }
+      [data-light-kind="reflection"]:focus-visible .project-light { animation: panel-reflection 1.65s ease-out; }
     }
     @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
       .examples__card:hover::after { opacity: 1; background-color: #fff1bf; }
       .examples__card:hover [data-light-kind="window"] .project-light { opacity: .72; }
-      .examples__card:hover [data-light-kind="reflection"] .project-light { animation: panel-reflection .95s ease-out; }
+      .examples__card:hover [data-light-kind="reflection"] .project-light { animation: panel-reflection 1.65s ease-out; }
     }
     @keyframes panel-reflection {
       0% { opacity: 0; background-position: 100% 50%; }
