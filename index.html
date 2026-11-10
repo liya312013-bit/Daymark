@@ -1231,21 +1231,25 @@ SOFTWARE.
     .site-footer a:hover { text-decoration: underline; }
     .site-footer__meta {
       grid-area: meta;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: flex;
+      justify-content: flex-end;
       align-items: center;
-      gap: 12px;
+      gap: .35em;
       margin-top: clamp(32px, 8.3vw, 164px);
+      color: #cac2b7;
       font-size: clamp(16px, 1.15vw, 24px);
     }
-    .site-footer__meta > :nth-child(2) { justify-self: center; }
+    .site-footer__caption {
+      display: grid;
+      text-align: end;
+      line-height: 1.4;
+    }
     .site-footer a.site-footer__credit {
       display: inline-flex;
+      justify-content: center;
       align-items: center;
-      gap: .45em;
-      justify-self: end;
+      min-width: 44px;
       min-height: 44px;
-      color: #cac2b7;
       text-decoration: none;
     }
     .site-footer__monogram {
@@ -1264,7 +1268,7 @@ SOFTWARE.
     @media (max-width: 759px) {
       .cost, .plan { grid-template-columns: 1fr; }
       .cost h2 { font-size: clamp(44px, 10vw, 72px); }
-      .site-footer { grid-template-columns: minmax(0, 1fr); grid-template-areas: "nav" "meta" "brand"; }
+      .site-footer { grid-template-columns: minmax(0, 1fr); grid-template-areas: "nav" "brand" "meta"; }
       .site-footer__brand {
         min-height: 0;
         margin-top: 24px;
@@ -1272,9 +1276,7 @@ SOFTWARE.
       .site-footer__brand img { width: 100%; }
       .site-footer nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
       .site-footer nav a { min-height: 44px; }
-      .site-footer__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .site-footer__meta > :nth-child(2) { justify-self: end; }
-      .site-footer__credit { grid-column: 1 / -1; }
+      .site-footer__meta { margin-top: 20px; }
     }
   </style>
 </head>
@@ -1640,13 +1642,14 @@ SOFTWARE.
       <a href="./privacy.html">Privacy Policy</a>
     </nav>
     <div class="site-footer__meta">
-      <span>© 2026 DAYMARK</span>
-      <span>Portfolio concept</span>
+      <div class="site-footer__caption">
+        <span>DAYMARK © 2026</span>
+        <span>Portfolio concept</span>
+      </div>
       <a class="site-footer__credit" href="https://www.instagram.com/feliya.design.ua/" target="_blank" rel="noopener noreferrer" aria-label="Design by FeLiya · Instagram @feliya.design.ua">
         <span class="site-footer__monogram" aria-hidden="true">
           <img src="./assets/feliya-monogram.png" width="1100" height="400" alt="" decoding="async" loading="lazy">
         </span>
-        <span>Design by FeLiya</span>
       </a>
     </div>
     <a class="site-footer__brand" href="#top" aria-label="Daymark home">
