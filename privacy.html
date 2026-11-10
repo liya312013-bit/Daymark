@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How the DAYMARK portfolio demo handles form entries and technical information.">
+  <title>Privacy Policy — DAYMARK</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2301223e'/%3E%3Cpath d='M7 7h18L7 25Z' fill='%23ffc24d'/%3E%3C/svg%3E">
+  <style>
+    @font-face { font-family: Inter; src: url("./assets/inter.woff2") format("woff2"); font-display: swap; }
+    @font-face { font-family: Anton; src: url("./assets/anton.woff2") format("woff2"); font-display: swap; }
+    :root { color-scheme: light; font: 16px/1.6 Inter, system-ui, sans-serif; color: #08243d; background: #e1eff7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .page { max-width: 58rem; margin: auto; padding: clamp(14px, 4vw, 44px); }
+    header { position: relative; overflow: hidden; padding: clamp(24px, 6vw, 60px); border-radius: 24px; background: #01223e; color: #f7fafc; }
+    header::after { position: absolute; inset: 0 0 auto auto; width: 42px; height: 42px; background: #ffc24d; clip-path: polygon(0 0, 100% 0, 100% 100%); content: ""; }
+    .brand { display: inline-flex; align-items: center; min-height: 44px; }
+    .brand img { display: block; width: 150px; height: auto; }
+    h1 { margin: 24px 0 8px; color: #ffc24d; font: 400 clamp(42px, 8vw, 88px)/1.08 Anton, Impact, sans-serif; }
+    header p { margin: 0; }
+    article { margin-top: 12px; padding: clamp(22px, 6vw, 56px); border-radius: 24px; background: #edf5f7; }
+    h2 { margin: 26px 0 6px; font-size: 1.25rem; line-height: 1.3; }
+    article p { margin: 0; }
+    a { color: inherit; text-underline-offset: .17em; overflow-wrap: anywhere; }
+    a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+    .back { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; padding: 8px 16px; border-radius: 12px; background: #ffc24d; font-weight: 750; }
+    footer { padding: 20px 0 0; font-size: .875rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main>
+      <header>
+        <a class="brand" href="./" aria-label="DAYMARK home">
+          <img src="./assets/daymark-logo.webp" width="2172" height="724" alt="">
+        </a>
+        <h1>PRIVACY POLICY</h1>
+        <p>Updated <time datetime="2026-11-10">10 November 2026</time></p>
+      </header>
+
+      <article aria-label="Privacy details">
+        <p>DAYMARK is a website design concept by FeLiya. This page explains how the public demo handles information.</p>
+
+        <h2>Demo quote form</h2>
+        <p>When you complete the form, your browser checks the fields and shows a confirmation page. The site does not send or store the values you enter, including your name, email address, optional phone number and system choice. This demo does not send requests to Google Sheets or Telegram. Use sample details when trying it.</p>
+
+        <h2>Hosting and technical data</h2>
+        <p>The site is hosted by Vercel. Vercel may process technical request information, such as IP addresses, to deliver and secure the site. See <a href="https://vercel.com/legal/privacy-notice">Vercel’s Privacy Notice</a> for details.</p>
+
+        <h2>External links</h2>
+        <p>If you follow a link to Instagram or another service, that service handles your visit under its own privacy policy.</p>
+
+        <h2>Contact</h2>
+        <p>For questions about the demo, contact <a href="https://www.instagram.com/feliya.design.ua/">FeLiya on Instagram</a>.</p>
+
+        <a class="back" href="./">Back to DAYMARK</a>
+      </article>
+    </main>
+    <footer>© 2026 DAYMARK · Portfolio concept</footer>
+  </div>
+</body>
+</html>
