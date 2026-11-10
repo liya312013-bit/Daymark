@@ -1231,40 +1231,26 @@ SOFTWARE.
     .site-footer a:hover { text-decoration: underline; }
     .site-footer__meta {
       grid-area: meta;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: .35em;
+      display: grid;
+      justify-self: end;
+      justify-items: end;
+      width: min(100%, 400px);
+      gap: 4px;
       margin-top: clamp(32px, 8.3vw, 164px);
       color: #cac2b7;
-      font-size: clamp(16px, 1.15vw, 24px);
-    }
-    .site-footer__caption {
-      display: grid;
-      text-align: end;
-      line-height: 1.4;
+      font-size: 16px;
     }
     .site-footer a.site-footer__credit {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 44px;
+      display: block;
+      width: 100%;
       min-height: 44px;
-      text-decoration: none;
     }
-    .site-footer__monogram {
-      position: relative;
-      flex: 0 0 1.4em;
-      height: 1.5em;
-      overflow: hidden;
-    }
-    .site-footer__monogram img {
-      position: absolute;
-      top: -1.06em;
-      left: -.3em;
-      width: 8em;
+    .site-footer__credit img {
+      display: block;
+      width: 100%;
       height: auto;
     }
+    .site-footer__copyright { margin-inline-end: .55em; }
     @media (max-width: 759px) {
       .cost, .plan { grid-template-columns: 1fr; }
       .cost h2 { font-size: clamp(44px, 10vw, 72px); }
@@ -1641,20 +1627,15 @@ SOFTWARE.
       <a href="#plan-your-system">Contact</a>
       <a href="./privacy.html">Privacy Policy</a>
     </nav>
-    <div class="site-footer__meta">
-      <div class="site-footer__caption">
-        <span>DAYMARK © 2026</span>
-        <span>Portfolio concept</span>
-      </div>
-      <a class="site-footer__credit" href="https://www.instagram.com/feliya.design.ua/" target="_blank" rel="noopener noreferrer" aria-label="Design by FeLiya · Instagram @feliya.design.ua">
-        <span class="site-footer__monogram" aria-hidden="true">
-          <img src="./assets/feliya-monogram.png" width="1100" height="400" alt="" decoding="async" loading="lazy">
-        </span>
-      </a>
-    </div>
     <a class="site-footer__brand" href="#top" aria-label="Daymark home">
       <img src="./assets/daymark-logo.webp" width="2172" height="724" alt="" decoding="async" loading="lazy">
     </a>
+    <div class="site-footer__meta">
+      <a class="site-footer__credit" href="https://www.instagram.com/feliya.design.ua/" target="_blank" rel="noopener noreferrer">
+        <img src="./assets/feliya-editorial-signature.png" width="886" height="247" alt="FeLiya · Web design · Portfolio concept. FeLiya on Instagram" decoding="async" loading="lazy">
+      </a>
+      <span class="site-footer__copyright">DAYMARK © 2026</span>
+    </div>
   </footer>
 
   <main class="thank-you with-fold with-fold--right" id="thank-you" aria-labelledby="thank-you-title" hidden>
