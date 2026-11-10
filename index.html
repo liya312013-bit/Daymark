@@ -544,30 +544,32 @@ SOFTWARE.
       text-align: center;
     }
     .button:hover { background-color: #ffd16e; }
-    .button--action { position: relative; display: inline-grid; }
+    .button--action { position: relative; isolation: isolate; display: inline-grid; }
     .button--action::before {
       position: absolute;
+      z-index: 1;
       inset: 0;
       border-radius: inherit;
       background: var(--ink);
-      opacity: 0;
+      clip-path: inset(0 100% 0 0);
       pointer-events: none;
       content: "";
     }
     .button--action > * { position: relative; grid-area: 1 / 1; place-self: center; }
-    .button--action > svg { color: var(--white); opacity: 0; }
-    .button--action:is(:active, .is-opening):not(:disabled)::before { opacity: 1; }
-    .button--action:is(:active, .is-opening):not(:disabled) > span { opacity: 0; }
+    .button--action > svg { z-index: 2; color: var(--white); opacity: 0; }
+    .button--action:is(:active, .is-opening):not(:disabled)::before { clip-path: inset(0); }
     .button--action:is(:active, .is-opening):not(:disabled) > svg { opacity: 1; }
     @media (hover: hover) and (pointer: fine) {
-      .button--action:hover:not(:disabled) { color: var(--white); }
-      .button--action:hover:not(:disabled)::before { opacity: 1; }
+      .button--action:hover:not(:disabled)::before { clip-path: inset(0); }
+      .button--action:hover:not(:disabled) > svg { opacity: 1; }
     }
     @media (prefers-reduced-motion: no-preference) {
-      .button--action { transition: color .26s ease; }
-      .button--action::before, .button--action > span, .button--action > svg {
-        transition: opacity .26s ease;
-      }
+      .button--action::before { transition: clip-path .38s ease-in-out; }
+      .button--action > svg { transition: opacity .15s ease; }
+      .button--action:is(:active, .is-opening):not(:disabled) > svg { transition-delay: .17s; }
+    }
+    @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+      .button--action:hover:not(:disabled) > svg { transition-delay: .17s; }
     }
     .hero__action .button { font-size: clamp(16px, 1.88vw, 32px); }
     .features { display: grid; justify-self: end; gap: .85vw; padding: 0; list-style: none; }

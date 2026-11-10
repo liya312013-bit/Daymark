@@ -78,7 +78,7 @@
         if (fullMotion.matches && button.classList.contains("button--action")) {
           quoteOpening = true;
           button.classList.add("is-opening");
-          await new Promise((resolve) => window.setTimeout(resolve, 260));
+          await new Promise((resolve) => window.setTimeout(resolve, 380));
           button.classList.remove("is-opening");
           quoteOpening = false;
           if (landing.hidden) return;
