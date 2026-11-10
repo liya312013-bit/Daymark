@@ -321,11 +321,10 @@
           if (section.getBoundingClientRect().top < window.innerHeight) return;
           gsap.from(section.children, {
             y: mobile ? 18 : 30,
-            opacity: 0,
             duration: mobile ? .42 : .6,
             stagger: .1,
             ease: "power2.out",
-            clearProps: "opacity,transform",
+            clearProps: "transform",
             scrollTrigger: { trigger: section, start: "top 88%", once: true },
           });
         });
