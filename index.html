@@ -559,7 +559,12 @@ SOFTWARE.
     .button--action:is(:active, .is-opening):not(:disabled)::before { opacity: 1; }
     .button--action:is(:active, .is-opening):not(:disabled) > span { opacity: 0; }
     .button--action:is(:active, .is-opening):not(:disabled) > svg { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .button--action:hover:not(:disabled) { color: var(--white); }
+      .button--action:hover:not(:disabled)::before { opacity: 1; }
+    }
     @media (prefers-reduced-motion: no-preference) {
+      .button--action { transition: color .26s ease; }
       .button--action::before, .button--action > span, .button--action > svg {
         transition: opacity .26s ease;
       }
